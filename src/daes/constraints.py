@@ -1,0 +1,6 @@
+def generate_cylinder_constraints(geometry: np.ndarray) -> np.ndarray:
+    ...
+    
+def generate_cylinder_forces(geometry: np.ndarray, constraints: np.ndarray, gravity_acceleration: float, fluid_density: float, fluid_viscosity: float) -> np.ndarray:
+    ...
+    
