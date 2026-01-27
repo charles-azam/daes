@@ -2,26 +2,55 @@ from daes.geometry import generate_cylinder_geometry
 from daes.constraints import generate_cylinder_constraints, generate_cylinder_forces
 from daes.solver import solve_system_of_equations
 import numpy as np
+from dataclasses import dataclass
 
+@dataclass
+class CylinderGeometry:
+    height: float
+    radius: float
 
-def run_calcul_statique_for_cylinder(cylinder_height: float, cylinder_radius: float, gravity_acceleration: float, fluid_density: float, fluid_viscosity: float) -> None:
+@dataclass
+class FluidProperties:
+    density: float
+    viscosity: float
     
-    geometry = generate_cylinder_geometry(cylinder_height, cylinder_radius)
+@dataclass
+class ProblemDefinition:
+    geometry: CylinderGeometry
+    fluid_properties: FluidProperties
+    gravity_acceleration: float
+
+def run_calcul_statique_for_cylinder(geometry: CylinderGeometry, gravity_acceleration: float, fluid_density: float, fluid_viscosity: float) -> None:
+    
+    geometry = generate_cylinder_geometry(geometry.height, geometry.radius)
     
     constraints = generate_cylinder_constraints(geometry)
     
-    forces = generate_cylinder_forces(geometry, constraints, gravity_acceleration, fluid_density, fluid_viscosity)
+    forces = generate_cylinder_forces(geometry=geometry, constraints=constraints, gravity_acceleration=gravity_acceleration, fluid_density=fluid_density, fluid_viscosity=fluid_viscosity)
     
     displacements = solve_system_of_equations(forces, constraints)
     
     return displacements
 
-def save_displacements_to_images(displacements: np.ndarray) -> None:
-    ...
-    
+def compute_sum_of_list(inputs: list[int]) -> int:
+    if len(inputs) != 3:
+        raise ValueError("la liste en entrée doit contenir 3 éléments qui correspondent aux coordonnées x, y, z")
+    sum = inputs[0] + inputs[1] + inputs[2]
+    return sum
+
+def compute_sum_of_list2(inputs: list[int]) -> int:
+    try:
+        sum = inputs[0] + inputs[1] + inputs[2]
+        return sum
+    except:
+        raise ValueError("la liste en entrée doit contenir 3 éléments qui correspondent aux coordonnées x, y, z")
+
+
+        
 def main() -> None:
-    displacements = run_calcul_statique_for_cylinder(1.0, 0.5, 9.81, 1000, 0.001)
-    save_displacements_to_images(displacements)
+    output = compute_sum_of_list([1, 2, 3])
+    print("output:", output)
+    
 
     
 if __name__ == "__main__":
