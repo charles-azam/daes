@@ -1,0 +1,1 @@
+# Repository used for a training session
