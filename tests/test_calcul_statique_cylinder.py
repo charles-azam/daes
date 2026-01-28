@@ -12,6 +12,7 @@ def test_run_calcul_statique_for_cylinder() -> None:
     assert np.allclose(displacements, np.ones((3, 3)))
 
 
-    
+
+
 if __name__ == "__main__":
     test_run_calcul_statique_for_cylinder()
