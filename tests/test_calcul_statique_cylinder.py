@@ -10,7 +10,7 @@ def test_run_calcul_statique_for_cylinder() -> None:
     displacements = run_calcul_statique_for_cylinder(geometry, gravity_acceleration, fluid_density, fluid_viscosity)
     assert displacements.shape == (3, 3)
     assert np.allclose(displacements, np.ones((3, 3)))
-
+    
 
 
 
