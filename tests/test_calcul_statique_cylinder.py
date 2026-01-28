@@ -11,8 +11,6 @@ def test_run_calcul_statique_for_cylinder() -> None:
     assert displacements.shape == (3, 3)
     assert np.allclose(displacements, np.ones((3, 3)))
     
-    assert False
-
 
 
 
